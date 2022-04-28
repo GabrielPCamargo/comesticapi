@@ -1,5 +1,7 @@
 import Sequelize, { Model } from 'sequelize';
 
+import appConfig from '../config/appConfig';
+
 export default class Product extends Model {
   static init(sequelize) {
     super.init({
@@ -21,6 +23,10 @@ export default class Product extends Model {
         type: Sequelize.STRING,
         allowNull: false,
         defaultValue: '',
+        get() {
+          const url = `${appConfig.url}/images/${this.getDataValue('image')}`;
+          return this.getDataValue('image') ? url : '';
+        },
       },
       description: {
         type: Sequelize.STRING,

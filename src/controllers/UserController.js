@@ -15,7 +15,6 @@ class UserController {
       res.status(400).json({
         errors: err,
       });
-      console.log(err);
     }
   }
 
