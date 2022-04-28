@@ -8,10 +8,18 @@ import multerConfig from '../config/multer';
 const upload = multer(multerConfig).single('image');
 class ProductController {
   async index(req, res) {
+    const offset = Number(get(req, 'query.offset', '0'));
+    const limit = Number(get(req, 'query.limit', Number.MAX_SAFE_INTEGER));
+    console.log(req.query.limit);
+
     try {
-      const products = await Product.findAll();
+      const products = await Product.findAll({
+        limit,
+        offset,
+      });
       res.json(products);
     } catch (err) {
+      console.log(err);
       res.status(404).json({
         errors: err.errors.map((error) => error.message),
       });
