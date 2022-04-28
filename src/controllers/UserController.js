@@ -1,10 +1,7 @@
 import User from '../models/User';
+import Product from '../models/Product';
 
 class UserController {
-  async index(req, res) {
-    //
-  }
-
   async store(req, res) {
     try {
       const user = await User.create(req.body);
@@ -59,6 +56,30 @@ class UserController {
         errors: (err.errors ? err.errors.map((error) => error.message) : err),
       });
     }
+  }
+
+  async products(req, res) {
+    const { id } = req.params;
+
+    if (!id) {
+      return res.status(409).json({
+        errors: ['É necessário enviar um ID de usuario'],
+      });
+    }
+
+    const products = await Product.findAll({
+      where: {
+        user_id: id,
+      },
+    });
+
+    if (products.length === 0) {
+      return res.status(400).json({
+        errors: ['Não foi encontrado nenhum produto para o usuario indicado'],
+      });
+    }
+
+    res.json(products);
   }
 }
 
