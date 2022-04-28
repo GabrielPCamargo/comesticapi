@@ -1,3 +1,3 @@
 export default {
-  url: 'https://comesticapi.gabrielcamargo.dev',
+  url: 'https://cosmeticapi.gabrielcamargo.dev',
 };
