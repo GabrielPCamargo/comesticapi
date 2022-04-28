@@ -19,7 +19,10 @@ export default async (req, res, next) => {
     const { id, email } = dados;
 
     const user = await User.findOne({
-      id, email,
+      where: {
+        id,
+        email,
+      },
     });
 
     if (!user) {
