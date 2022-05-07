@@ -13,7 +13,7 @@ class UserController {
       });
     } catch (err) {
       res.status(400).json({
-        errors: err,
+        errors: err.errors.map((error) => error.message),
       });
     }
   }
