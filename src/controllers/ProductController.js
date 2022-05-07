@@ -99,14 +99,25 @@ class ProductController {
           });
         }
 
-        const image = get(req, 'file.filename', '');
         const user_id = req.userId;
+        const image = get(req, 'file.filename', '');
 
-        const updatedProduct = await product.update({
-          ...req.body,
-          image,
-          user_id,
-        });
+        let args = {};
+
+        if (image) {
+          args = {
+            ...req.body,
+            image,
+            user_id,
+          };
+        } else {
+          args = {
+            ...req.body,
+            user_id,
+          };
+        }
+
+        const updatedProduct = await product.update(args);
         res.json(updatedProduct);
       } catch (e) {
         res.status(400).json({
