@@ -109,7 +109,7 @@ class ProductController {
         });
         res.json(updatedProduct);
       } catch (e) {
-        res.json({
+        res.status(400).json({
           errors: e.errors.map((error) => error.message),
         });
       }
