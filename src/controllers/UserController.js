@@ -61,7 +61,7 @@ class UserController {
     const { id } = req.params;
 
     if (!id) {
-      return res.status(409).json({
+      return res.status(400).json({
         errors: ['É necessário enviar um ID de usuario'],
       });
     }

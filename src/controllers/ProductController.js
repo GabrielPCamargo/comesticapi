@@ -94,7 +94,7 @@ class ProductController {
         }
 
         if (err) {
-          return res.json({
+          return res.status(400).json({
             error: err.code,
           });
         }

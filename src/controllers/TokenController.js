@@ -25,7 +25,7 @@ class TokenController {
 
       if (!(await user.passwordIsValid(password))) {
         res.status(401).json({
-          errors: ['Email inválido'],
+          errors: ['Senha inválido'],
         });
         return;
       }
