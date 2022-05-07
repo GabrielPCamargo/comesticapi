@@ -38,7 +38,7 @@ class TokenController {
         { expiresIn: process.env.TOKEN_EXPIRATION },
       );
 
-      res.json({ token });
+      res.json({ id, email, token });
     } catch (err) {
       res.json({
         errors: ['Não foi possível realizar a autenticacao'],
