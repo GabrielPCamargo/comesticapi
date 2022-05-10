@@ -2,6 +2,7 @@ import multer from 'multer';
 import { get } from 'lodash';
 
 import Product from '../models/Product';
+import User from '../models/User';
 
 import multerConfig from '../config/multer';
 
@@ -60,7 +61,13 @@ class ProductController {
     }
 
     try {
-      const product = await Product.findByPk(id);
+      const product = await Product.findByPk(id, {
+        include: [{
+          model: User,
+          as: 'user',
+          attributes: ['name', 'email', 'phone_number', 'address'],
+        }],
+      });
       if (!product) {
         return res.status(400).json({
           errors: ['Produto não encontrado'],
@@ -69,6 +76,8 @@ class ProductController {
 
       res.json(product);
     } catch (err) {
+      console.log(err);
+
       res.status(400).json({
         errors: err.errors.map((error) => error.message),
       });

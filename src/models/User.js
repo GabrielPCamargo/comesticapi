@@ -72,7 +72,7 @@ export default class User extends Model {
   }
 
   associtate(models) {
-    this.hasMany(models.Product, { foreignKey: 'user_id' });
+    this.hasMany(models.Product, { foreignKey: 'user_id', as: 'products' });
   }
 
   passwordIsValid(password) {
