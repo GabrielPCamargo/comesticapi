@@ -13,7 +13,7 @@ class ProductController {
     const limit = Number(get(req, 'query.limit', Number.MAX_SAFE_INTEGER));
 
     try {
-      const products = await Product.findAll({
+      const products = await Product.findAndCountAll({
         limit,
         offset,
       });

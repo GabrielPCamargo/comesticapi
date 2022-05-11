@@ -66,7 +66,7 @@ class UserController {
       });
     }
 
-    const products = await Product.findAll({
+    const products = await Product.findAndCountAll({
       where: {
         user_id: id,
       },
