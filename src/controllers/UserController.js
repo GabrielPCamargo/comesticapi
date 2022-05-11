@@ -1,3 +1,5 @@
+import get from 'lodash';
+
 import User from '../models/User';
 import Product from '../models/Product';
 
@@ -58,6 +60,8 @@ class UserController {
   }
 
   async products(req, res) {
+    const offset = Number(get(req, 'query.offset', '0'));
+    const limit = Number(get(req, 'query.limit', Number.MAX_SAFE_INTEGER));
     const { id } = req.params;
 
     if (!id) {
@@ -70,6 +74,8 @@ class UserController {
       where: {
         user_id: id,
       },
+      offset,
+      limit,
     });
 
     if (products.length === 0) {
